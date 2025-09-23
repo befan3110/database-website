@@ -19,7 +19,7 @@ li {
 
 .App {
     text-align: center;
-    background-color: #61dafb;
+    background-color: #ffffff;
 }
 
 .App-logo {
@@ -35,11 +35,11 @@ li {
     align-items: center;
     justify-content: center;
     font-size: calc(10px + 2vmin);
-    color: #000000;
+    color: #ff0000;
 }
 
 .App-link {
-    color: #61dafb;
+    color: #ffffff;
 }
 
 .heart {
