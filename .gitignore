@@ -3,3 +3,6 @@
 /.vscode/
 /dndclass.sqbpro
 /dnddb.sql
+/dndclass and spells.sqbpro
+/__pycache__/
+/.venv
