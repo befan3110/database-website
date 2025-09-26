@@ -14,12 +14,16 @@
             </form>
             {% if members.members %}
               <h2>DND Classes:</h2>
+              <h3>search for either main class ability or class name</h3>
               <ul>
                  {% for member in members.members %}
                   <li>
-                    {{ member.class_name }} ({{ member.class_ability }})
+                    <strong>{{ member.class_name }}</strong> ({{ member.class_ability }})
                     {% if members.show_description %}
-                      <p>{{ member.class_description }}</p>
+                      <details>
+                        <summary>Show Description</summary>
+                        <p>{{ member.class_description }}</p>
+                      </details>
                     {% endif %}
                   </li>
                 {% endfor %}

@@ -1,8 +1,15 @@
- body {
+/* Import the "Papyrus" font (note: no Google Fonts link for Papyrus, so it will use system font if available) */
+@font-face {
+    font-family: 'Papyrus';
+    src: local('Papyrus'), local('Comic Sans MS');
+}
+
+* {
+    font-family: 'Papyrus', sans-serif;
+}
+
+body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

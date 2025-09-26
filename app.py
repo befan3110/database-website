@@ -4,6 +4,7 @@ import sqlite3
 # Importer flask
 app = Flask(__name__)
 DB_DND = "dndclass.db"
+DB_DND2 = "dndspells.db"
 
 
 def get_db_classes():
@@ -13,6 +14,12 @@ def get_db_classes():
         g.db_classes.row_factory = sqlite3.Row
     return g.db_classes
 
+def get_db_spells():
+# henter vores database    
+    if "db_spells" not in g:
+        g.db_spells = sqlite3.connect(DB_DND2)
+        g.db_spells.row_factory = sqlite3.Row
+    return g.db_spells
 
 @app.teardown_appcontext
 def close_db(exception):
@@ -20,6 +27,11 @@ def close_db(exception):
     if db_classes is not None:
         db_classes.close()
 
+@app.teardown_appcontext
+def close_db(exception):
+    db_spells = g.pop("db_spells", None)
+    if db_spells is not None:
+        db_spells.close()
 
 # vores funktion til at søge i databasen
 @app.route("/DND_classes", methods=["GET", "POST"])
@@ -48,6 +60,36 @@ def classes_page():
             members = {"members": [dict(u) for u in data], "show_description": show_description}
 
     return render_template("classes.html", title="Welcome", members=members)
+    # returnerer vores værdier til html siden
+
+
+# vores funktion til at søge i databasen
+@app.route("/DND_spells", methods=["GET", "POST"])
+def spells_page():
+    db_spells = get_db_spells()
+    
+    query = None
+    params = ()
+    members = {"members": []}
+
+    if request.method == "POST":
+        search_term = request.form.get("search_term", "").strip()
+        if search_term:
+            # søger
+            query = """
+                SELECT spell_id, spell_name, spell_level, casting_time, spell_range, components, duration, description, higher_levels
+                FROM dnd5_spells
+                WHERE spell_name LIKE ? OR spell_level LIKE ?
+            """
+            params = (f"%{search_term}%", f"%{search_term}%")
+
+            cur = db_spells.execute(query, params)
+            data = cur.fetchall()
+            cur.close()
+
+            members = {"members": [dict(u) for u in data]}
+
+    return render_template("spells.html", title="Welcome", members=members)
     # returnerer vores værdier til html siden
 
 # Starter Flask server

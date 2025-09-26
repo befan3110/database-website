@@ -1,0 +1,41 @@
+<html>
+<head>
+    <title>DND hjemmeside med søgefunktion til spells</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+</head>
+<body>
+    <div class="App">
+        <header class="App-header">
+            <img src="{{ url_for('static', filename='dndlogo.webp') }}" class="App-logo" alt="logo" />
+            <h1>Søg efter en spell</h1>
+            <form method="post" action="">
+              <input type="text" name="search_term" placeholder="Search..." required>
+              <button type="submit">Search</button>
+            </form>
+            {% if members.members %}
+              <h2>DND Spells:</h2>
+              <h3>Search for spells by name or level</h3>
+              <ul>
+                 {% for member in members.members %}
+                  <li>
+                    <strong>{{ member.spell_name }}</strong> (Level: {{ member.spell_level }})
+                    <details>
+                      <summary>Click to expand</summary>
+                      <p><strong>Casting Time:</strong> {{ member.casting_time }}</p>
+                      <p><strong>Range:</strong> {{ member.spell_range }}</p>
+                      <p><strong>Components:</strong> {{ member.components }}</p>
+                      <p><strong>Duration:</strong> {{ member.duration }}</p>
+                      <p><strong>Description:</strong> {{ member.description }}</p>
+                      <p><strong>Higher Levels:</strong> {{ member.higher_levels }}</p>
+                    </details>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+            {% if not members.members and request.method == "POST" %}
+              <p>No results found.</p>
+            {% endif %}
+        </header>
+    </div>
+</body>
+</html>
