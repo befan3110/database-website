@@ -1,58 +1,221 @@
-/* Import the "Papyrus" font (note: no Google Fonts link for Papyrus, so it will use system font if available) */
-@font-face {
-    font-family: 'Papyrus';
-    src: local('Papyrus'), local('Comic Sans MS');
+:root {
+  /* === Gold & Charcoal palette === */
+  --bg: #1b1b1b;           /* deep charcoal background */
+  --parchment: #2a2a2a;    /* dark card base (charcoal tint) */
+  --accent: #d4af37;       /* metallic gold accent */
+  --text-light: #f5eec7;   /* warm light text */
+  --text-dark: #d6cfa3;    /* soft gold-tan for dark elements */
 }
 
-* {
-    font-family: 'Papyrus', sans-serif;
+/* Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+
+/* Body with dark base + subtle texture */
+body.App-body,
+body.classes-body {
+  background-color: var(--bg);
+  background-image: url('/static/parchment-texture.jpg');
+  background-repeat: repeat;
+  background-size: 600px auto;
+  background-blend-mode: overlay;
+  color: var(--text-light);
+  font-family: "Crimson Text", "Georgia", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  min-height: 100vh;
+  position: relative;
 }
 
-body {
-    margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
-}
-
-li {
-    text-align: center;
-    list-style-type: none;
-} 
-
+/* App container */
 .App {
-    text-align: center;
-    background-color: #ffffff;
+  max-width: 980px;
+  margin: 32px auto;
+  padding: 28px;
+  position: relative;
+  z-index: 1;
 }
 
-.App-logo {
-    height: 40vmin;
-    max-height: 100px;
-    pointer-events: none;
-}
-
+/* Header */
 .App-header {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-size: calc(10px + 2vmin);
-    color: #ff0000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  color: var(--accent);
 }
 
-.App-link {
-    color: #ffffff;
+/* Logo */
+.App-logo {
+  height: 120px;
+  max-height: 150px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,0.6));
+  display: block;
 }
 
-.heart {
-    color: #ff0000;
+/* Headings */
+.App-header h1,
+.App-header h2,
+.App-header h3 {
+  font-family: "Uncial Antiqua", "Papyrus", serif;
+  color: var(--accent);
+  margin: 6px 0;
 }
 
-.small {
-    font-size: 0.75rem;
+/* Tagline */
+.tagline {
+  margin-top: -6px;
+  font-size: 1.1rem;
+  color: #e5d88f;     /* brighter gold for visibility */
+  font-style: italic;
+}
+
+/* Form */
+.search-form {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 1.5rem 0 2rem;
+}
+.search-form input[type="text"] {
+  padding: 0.6rem 1rem;
+  width: 300px;
+  border-radius: 6px;
+  border: 2px solid var(--accent);
+  background: #222;          /* charcoal field */
+  color: var(--text-light);
+  outline: none;
+}
+.search-form input[type="text"]::placeholder { color: #c8b97c; }
+.search-form button {
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  border: none;
+  border-radius: 6px;
+  color: #1b1b1b;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.search-form button:hover { background: #e0c35a; }
+
+/* Spell list */
+ul.spell-list {
+  list-style: none;
+  margin-top: 18px;
+  padding: 0;
+  width: 100%;
+}
+ul.spell-list li {
+  background: #333;                /* dark charcoal card */
+  color: var(--text-light);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  border: 1px solid var(--accent);
+  transition: transform .18s ease;
+}
+ul.spell-list li:hover { transform: translateY(-4px); }
+
+li .spell-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+/* details styling */
+ul.spell-list details summary {
+  cursor: pointer;
+  margin-top: 8px;
+  font-weight: 600;
+  color: var(--accent);
+}
+ul.spell-list details p {
+  margin: 6px 0;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+/* Classes styles */
+body.classes-body .section-title {
+  font-family: "Uncial Antiqua", "Papyrus", serif;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 1.2rem;
+}
+body.classes-body .card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+body.classes-body .class-card {
+  background: #2e2e2e;          /* slightly lighter charcoal card */
+  color: var(--text-light);
+  border-radius: 10px;
+  padding: 1.2rem;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  border: 2px solid var(--accent);
+  position: relative;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+body.classes-body .class-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.8);
+}
+body.classes-body .class-name {
+  font-family: "Uncial Antiqua", serif;
+  color: var(--accent);
+  font-size: 1.3rem;
+  margin-bottom: 0.4rem;
+}
+body.classes-body .ability {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #f1d77a;
+}
+body.classes-body .description {
+  font-size: 0.95rem;
+  line-height: 1.4;
+  color: var(--text-light);
+}
+
+.scroll-left,
+.scroll-right {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  background: url('/static/scroll-border.png') repeat-y center;
+  background-size: contain;
+  opacity: 0.4;
+  pointer-events: none;
+  z-index: 9999;
+}
+.scroll-left { left: 0; }
+.scroll-right { right: 0; }
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 1.2rem 0;
+  color: #bda14a;
+  font-size: 0.9rem;
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .App { padding: 16px; }
+  .search-form input[type="text"] { width: 160px; }
+  body.classes-body .card-grid { justify-content: center; }
 }

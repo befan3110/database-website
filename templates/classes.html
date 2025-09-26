@@ -1,38 +1,55 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>DND hjemmeside med søgefunktion til classes</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>D&D Classes & Abilities</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 </head>
-<body>
-    <div class="App">
-        <header class="App-header">
-            <img src="{{ url_for('static', filename='dndlogo.webp') }}" class="App-logo" alt="logo" />
-            <h1>søg efter en class eller ability</h1>
-            <form method="post" action="">
-              <input type="text" name="search_term" placeholder="Search..." required>
-              <button type="submit">Search</button>
-            </form>
-            {% if members.members %}
-              <h2>DND Classes:</h2>
-              <h3>search for either main class ability or class name</h3>
-              <ul>
-                 {% for member in members.members %}
-                  <li>
-                    <strong>{{ member.class_name }}</strong> ({{ member.class_ability }})
-                    {% if members.show_description %}
-                      <details>
-                        <summary>Show Description</summary>
-                        <p>{{ member.class_description }}</p>
-                      </details>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-            {% if not members.members and request.method == "POST" %}
-              <p>No results found.</p>
-            {% endif %}
-        </header>
-    </div>
+<body class="classes-body">
+
+  <main class="App">
+    <header class="App-header">
+      <img src="{{ url_for('static', filename='dndlogo2.png') }}"
+           class="App-logo"
+           alt="Dungeons & Dragons logo">
+
+      <h1>Discover Your Class</h1>
+      <p class="tagline">Search by class name or its main ability score.</p>
+
+      <form method="post" action="" class="search-form">
+        <input type="text" name="search_term"
+               placeholder="Search classes..."
+               required
+               aria-label="Search classes">
+        <button type="submit">Search</button>
+      </form>
+    </header>
+
+    {% if members.members %}
+    <section class="results">
+      <h2 class="section-title">Classes</h2>
+      <div class="card-grid">
+        {% for member in members.members %}
+        <article class="class-card">
+          <h3 class="class-name">{{ member.class_name }}</h3>
+          <p class="ability"><strong>Main Ability:</strong> {{ member.class_ability }}</p>
+          <p class="description">{{ member.class_description }}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not members.members and request.method == "POST" %}
+      <p class="no-results">No results found.</p>
+    {% endif %}
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; {{ current_year }} Adventurers' Guild</p>
+  </footer>
+
 </body>
 </html>
