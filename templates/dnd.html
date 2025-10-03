@@ -1,21 +1,78 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Python med flask og sqlite3</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            background: #1a1a1d;
+            color: #f8f3e6;
+            font-family: 'Georgia', serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            padding: 20px;
+            background: #4a0e0e;
+        }
+        header img {
+            max-width: 150px;
+        }
+        h1 {
+            margin-top: 20px;
+            font-size: 2.5rem;
+            text-shadow: 2px 2px #000;
+        }
+        p {
+            font-size: 1.2rem;
+            margin: 20px auto;
+            width: 60%;
+            line-height: 1.6;
+        }
+        .button-container {
+            margin-top: 30px;
+        }
+        .btn {
+            display: inline-block;
+            margin: 15px;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #f8f3e6;
+            background: #6b1d1d;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background: #9c2d2d;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
-    <div class="App">
-        <header class="App-header">
-            <img src="{{ url_for('static', filename='dndlogo.webp') }}" class="App-logo" alt="logo" />
-            <h1>flask og sqlite3</h1>
-            <h2>Users</h2>
-            <ul>
-              {% for user in users.users %}
-                <li>{{ user.uname }} ({{ user.password }})</li>
-              {% endfor %}
-            </ul>
-        </header>
-    </div>
-</body>
+  {% include 'nav.html' %}
 
+  <header>
+      <img src="{{ url_for('static', filename='dndlogo2.png') }}" alt="DnD Logo">
+  </header>
+
+  <h1>Welcome Adventurer!</h1>
+  <p>
+      Step forth into the realm of <strong>Dungeons & Dragons</strong>.  
+      Here, knowledge awaits you. Study the mighty <strong>classes</strong> of heroes and the powerful <strong>spells</strong> they wield.  
+      Choose your path wisely, for destiny lies within your grasp.
+  </p>
+
+  <div class="button-container">
+      <a href="{{ url_for('classes_page') }}" class="btn">Explore Classes</a>
+      <a href="{{ url_for('spells_page') }}" class="btn">Discover Spells</a>
+  </div>
+</body>
 </html>

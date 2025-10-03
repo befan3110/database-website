@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='main.css', v=2) }}">
 </head>
 <body class="App-body">
+  {% include 'nav.html' %}
   <div class="App">
     <header class="App-header">
       <img src="{{ url_for('static', filename='dndlogo2.png') }}" class="App-logo" alt="logo" />

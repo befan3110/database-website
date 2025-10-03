@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            font-family: Georgia, serif;
+            background-color: #1b1b1b;
+            color: #f5eec7;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #4a0e0e;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            color: #d4af37;
+            margin: 0;
+        }
+        main {
+            max-width: 900px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #2a2a2a;
+            border-radius: 12px;
+            box-shadow: 0 0 12px rgba(0,0,0,0.7);
+        }
+        h2 {
+            color: #d4af37;
+            margin-top: 20px;
+        }
+        p {
+            margin-bottom: 12px;
+        }
+        code {
+            background: #333;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #ffd700;
+        }
+        ul {
+            margin: 12px 0 20px 20px;
+        }
+        nav {
+            background-color: #4a0e0e;
+            padding: 12px 0;
+            text-align: center;
+        }
+        nav a {
+            color: #f8f3e6;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        nav a:hover {
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body>
+    {% include 'nav.html' %}
+
+    <header>
+        <h1>Dokumentation for D&D Websitet</h1>
+    </header>
+
+    <main>
+        <h2>Flask</h2>
+        <p>
+            Flask er det webframework jeg bruger til at køre hele applikationen. Flask håndterer:
+        </p>
+        <ul>
+            <li>Routing (<code>@app.route</code>) – bestemmer hvilke URL’er viser hvilke sider</li>
+            <li>Integration med templates (Jinja2)</li>
+            <li>Forbindelse mellem Python-kode og HTML</li>
+        </ul>
+
+        <h2>Jinja2</h2>
+        <p>
+            Jinja2 er templating-motoren som Flask bruger. Den gør det muligt at indsætte Python-variabler direkte i HTML. 
+            Eksempel:
+        </p>
+        <p><code>{% raw %}{{ variable }}{% endraw %}</code></p>
+        <p>
+            Den bruges også til kontrolstrukturer som loops og if-sætninger:
+        </p>
+        <p><code>{% raw %}{% for item in list %}{% endfor %}{% endraw %}</code></p>
+
+        <h2>SQLite databaser</h2>
+        <p>
+            jeg bruger to SQLite databaser til at gemme information:
+        </p>
+        <ul>
+            <li><code>dndclass.db</code> – indeholder klasser, deres evner og beskrivelser</li>
+            <li><code>dndspells.db</code> – indeholder spells, niveau, casting time og beskrivelser</li>
+        </ul>
+        <p>
+            Flask forbinder til databaserne gennem <code>sqlite3</code> modulet, og resultaterne bliver konverteret til rækker 
+            som jeg kan vise i HTML.
+        </p>
+
+        <h2>CSS og Design</h2>
+        <p>
+            Alt udseende styres af min <code>main.css</code>. Her definerer jeg farver, baggrunde og layout. 
+            Vi har også tilføjet et baggrundsbillede <code>dndbackground.jpg</code> med lav gennemsigtighed, så det 
+            understøtter temaet uden at gøre teksten svær at læse.
+        </p>
+
+        <h2>Navigation</h2>
+        <p>
+            Øverst på alle sider har jeg en <code>nav</code> menu. Den giver adgang til:
+        </p>
+        <ul>
+            <li><strong>Home</strong> – forsiden</li>
+            <li><strong>Classes</strong> – søg og læs om alle klasser</li>
+            <li><strong>Spells</strong> – søg og læs om alle spells</li>
+        </ul>
+
+        <h2>Konklusion</h2>
+        <p>
+            Kombinationen af Flask, Jinja2, SQLite databaser og CSS gør det muligt at bygge en interaktiv, 
+            tematisk og brugervenlig Dungeons & Dragons reference side.
+        </p>
+    </main>
+</body>
+</html>

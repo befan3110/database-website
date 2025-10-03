@@ -33,6 +33,12 @@ def close_db(exception):
     if db_spells is not None:
         db_spells.close()
 
+
+@app.route("/")
+def main_page():
+
+    return render_template("dnd.html", title="Arcane Compendium")
+
 # vores funktion til at søge i databasen
 @app.route("/DND_classes", methods=["GET", "POST"])
 def classes_page():
@@ -59,7 +65,7 @@ def classes_page():
 
             members = {"members": [dict(u) for u in data], "show_description": show_description}
 
-    return render_template("classes.html", title="Welcome", members=members)
+    return render_template("classes.html", title="class-site", members=members)
     # returnerer vores værdier til html siden
 
 
@@ -89,8 +95,13 @@ def spells_page():
 
             members = {"members": [dict(u) for u in data]}
 
-    return render_template("spells.html", title="Welcome", members=members)
+    return render_template("spells.html", title="spell-site", members=members)
     # returnerer vores værdier til html siden
+
+@app.route("/documentation")
+def doc_page():
+
+    return render_template("doc.html", title="Documentation")    
 
 # Starter Flask server
 if __name__ == "__main__":
