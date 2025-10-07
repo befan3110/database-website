@@ -22,12 +22,14 @@ def get_db_spells():
     return g.db_spells
 
 @app.teardown_appcontext
+# lukker vores database
 def close_db(exception):
     db_classes = g.pop("db_classes", None)
     if db_classes is not None:
         db_classes.close()
 
 @app.teardown_appcontext
+# lukker vores database
 def close_db(exception):
     db_spells = g.pop("db_spells", None)
     if db_spells is not None:
@@ -48,6 +50,8 @@ def classes_page():
     params = ()
     show_description = False
     members = {"members": [], "show_description": show_description}
+    
+
 
     if request.method == "POST":
         # skaffer søgemetoden
@@ -60,6 +64,7 @@ def classes_page():
             show_description = True
 
             cur = db_classes.execute(query, params)
+            # henter dataen for vores søgning
             data = cur.fetchall()
             cur.close()
 
@@ -90,6 +95,7 @@ def spells_page():
             params = (f"%{search_term}%", f"%{search_term}%")
 
             cur = db_spells.execute(query, params)
+            # henter dataen for vores søgning
             data = cur.fetchall()
             cur.close()
 
